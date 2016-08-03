@@ -30,21 +30,22 @@
 .element {
   padding: 0;
   position: absolute;
-  height: auto;
   margin-bottom: 40px;
-  width: 50%;
+  width: 40%;
   z-index: 1;
-  box-sizing: border-box;
+  padding: 0 5%;
 }
 
 .block-left .element {
   left: 0;
   padding-right: 40px;
+
 }
 
 .block-right .element {
   left: 50%;
-  padding-left: 40px;
+ padding-left: 40px;
+
 }
 
 .tooltip {

@@ -7,6 +7,7 @@ class TimeLine {
     this.tooltipHeight = parseInt((getComputedStyle(this.container.querySelector('.tooltip')).height), 10);
     this.shiftTooltip = 0;
     this.setTimeLine(this.elems);
+
     window.addEventListener("resize", this.setTimeLine.bind(this, this.elems));
 
   }
@@ -44,10 +45,11 @@ class TimeLine {
 
       tooltip.style.top = this.shiftTooltip + 'px';
 
+    //console.log( i+1, size.height)
     }
-
     let wrapperHeight = contentLeft > contentRight ? contentLeft : contentRight;
     this.container.querySelector('.wrapper').style.height = wrapperHeight + 'px';
+
   }
 
   tooltipPosition(startCoords) {
@@ -75,5 +77,7 @@ class TimeLine {
   }
 
 }
+//window.onload = function () { new TimeLine(document.getElementById('timeline')) }
+
 
 new TimeLine(document.getElementById('timeline'));
