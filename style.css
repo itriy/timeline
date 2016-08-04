@@ -28,6 +28,8 @@
   color: #fff;
   padding: 15px;
   box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 5px;
 }
 
 .element {
@@ -83,11 +85,13 @@
   border-right: 10px solid red;
 }
 .bl-image {
-  margin: -15px;
+  margin: -16px;
   margin-bottom: 0;
 }
 .bl-image img {
   width: 100%;
+  display: block;
+  border-radius: 5px 5px 0 0;
 }
 @media (max-width: 450px) {
   .main:after{
