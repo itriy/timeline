@@ -77,7 +77,7 @@ class TimeLine {
   }
 
 }
-//window.onload = function () { new TimeLine(document.getElementById('timeline')) }
+window.onload = function () { new TimeLine(document.getElementById('timeline')) }
 
 
-new TimeLine(document.getElementById('timeline'));
+//new TimeLine(document.getElementById('timeline'));
