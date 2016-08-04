@@ -26,18 +26,16 @@
 .element .content {
   background: blue;
   color: #fff;
-  padding: 10px;
+  padding: 15px;
   box-sizing: border-box;
 }
 
 .element {
   padding: 0;
   position: absolute;
-  // margin-bottom: 40px;
   width: 50%;
   padding: 20px;
-  margin: -20px -20px -20px -20px;
-  // background: pink;
+  margin: -20px;
   box-sizing: border-box;
 }
 
@@ -85,7 +83,8 @@
   border-right: 10px solid red;
 }
 .bl-image {
-  margin: -10px;
+  margin: -15px;
+  margin-bottom: 0;
 }
 .bl-image img {
   width: 100%;
