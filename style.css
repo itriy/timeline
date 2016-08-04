@@ -20,31 +20,36 @@
   bottom: 0;
   left: 50%;
   background: #000;
+  z-index: -1;
 }
 
 .element .content {
   background: blue;
   color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .element {
   padding: 0;
   position: absolute;
-  margin-bottom: 40px;
-  width: 40%;
-  z-index: 1;
-  padding: 0 5%;
+  // margin-bottom: 40px;
+  width: 50%;
+  padding: 20px;
+  margin: -20px -20px -20px -20px;
+  // background: pink;
+  box-sizing: border-box;
 }
 
 .block-left .element {
   left: 0;
-  padding-right: 40px;
+  margin-right: 20px;
 
 }
 
 .block-right .element {
   left: 50%;
- padding-left: 40px;
+ margin-left: 20px;
 
 }
 
@@ -79,17 +84,22 @@
   left: -20px;
   border-right: 10px solid red;
 }
-
+.bl-image {
+  margin: -10px;
+}
+.bl-image img {
+  width: 100%;
+}
 @media (max-width: 450px) {
   .main:after{
-    top: -30px;
+    top: 0px;
   }
   .element {
     position: relative;
     width: auto;
     top: 0 !important;
     left: 0 !important;
-    padding: 0 !important;
+    margin: 0 !important;
   }
   .wrapper {
     height: auto !important;
@@ -102,6 +112,6 @@
     display: none;
   }
   .tooltip {
-    top: -30px !important;
+    top: -10px !important;
   }
 }
