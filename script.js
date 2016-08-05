@@ -20,7 +20,7 @@ class TimeLine {
       contentRight = 0;
 
     let body = this.bodyWidth();
-
+    console.log(document.body.offsetWidth, document.body.clientWidth ,body.width)
     for (let i = 0; i < array.length; i++) {
 
       let elem = array[i].querySelector('.element');
@@ -55,7 +55,7 @@ class TimeLine {
 
 
     }
-    if(document.body.offsetWidth >= this.minDocumentWidth){
+    if(body.width >= this.minDocumentWidth){
       let wrapperHeight = contentLeft > contentRight ? contentLeft : contentRight;
       this.wrapper.style.height = wrapperHeight + 'px';
     }
@@ -81,7 +81,7 @@ class TimeLine {
       height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10)
     }
   }
-  
+
   blockSize(block) {
 
     let box = getComputedStyle(block);
