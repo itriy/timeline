@@ -8,6 +8,9 @@ class TimeLine {
     this.elems = this.container.querySelectorAll('.element-wrapper');
     this.tooltipHeight = parseInt((getComputedStyle(this.container.querySelector('.tooltip')).height), 10);
     this.shiftTooltip = 0;
+    let scrollWidth = this.getScrollWidth();
+
+    console.log(scrollWidth.width);
     this.setTimeLine(this.elems);
 
     window.addEventListener("resize", this.setTimeLine.bind(this, this.elems));
@@ -74,12 +77,31 @@ class TimeLine {
     }
 
   }
+
   bodyWidth(){
     let body = getComputedStyle(document.body);
     return {
       width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10),
       height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10)
     }
+  }
+
+  getScrollWidth(){
+    let div = document.createElement('div');
+
+    div.style.overflowY = 'scroll';
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.visibility = 'hidden';
+    div.style.position = 'absolute';
+    div.style.top = '0px';
+    div.style.left = '0px';
+
+    document.body.appendChild(div);
+    let scrollWidth = div.offsetWidth - div.clientWidth;
+    document.body.removeChild(div);
+
+    return {width: scrollWidth};
   }
 
   blockSize(block) {
