@@ -1,8 +1,10 @@
 class TimeLine {
   
-  constructor(container) {
+  constructor(container, options) {
 
-    this.container = container;
+    this.container = document.getElementById(container);
+    this.minDocumentWidth = options.minDocumentWidth || true;
+    this.wrapper = this.container.querySelector('.wrapper');
     this.elems = this.container.querySelectorAll('.element-wrapper');
     this.tooltipHeight = parseInt((getComputedStyle(this.container.querySelector('.tooltip')).height), 10);
     this.shiftTooltip = 0;
@@ -17,38 +19,46 @@ class TimeLine {
     let contentLeft = 0,
       contentRight = 0;
 
+    let body = this.bodyWidth();
+
     for (let i = 0; i < array.length; i++) {
 
       let elem = array[i].querySelector('.element');
       let tooltip = array[i].querySelector('.tooltip');
       let size = this.blockSize(elem);
 
-      if (contentLeft <= contentRight) {
+      array[i].classList.remove('block-right');
+      array[i].classList.remove('block-left');
+      tooltip.style.top = '';
+      elem.style.top = '';
+      this.wrapper.style.height = '';
 
-        elem.style.top = contentLeft + 'px';
-        array[i].classList.remove('block-left');
-        array[i].classList.remove('block-right');
-        array[i].classList.add('block-left');
-        this.tooltipPosition(contentLeft);
-        contentLeft += size.height;
+      if( body.width >= this.minDocumentWidth){
+        if (contentLeft <= contentRight) {
 
-      } else {
+          elem.style.top = contentLeft + 'px';
+          array[i].classList.add('block-left');
+          this.tooltipPosition(contentLeft);
+          contentLeft += size.height;
 
-        elem.style.top = contentRight + 'px';
-        array[i].classList.remove('block-right');
-        array[i].classList.remove('block-left');
-        array[i].classList.add('block-right');
-        this.tooltipPosition(contentRight);
-        contentRight += size.height;
+        } else {
 
+          elem.style.top = contentRight + 'px';
+          array[i].classList.add('block-right');
+          this.tooltipPosition(contentRight);
+          contentRight += size.height;
+
+        }
+
+        tooltip.style.top = this.shiftTooltip + 'px';
       }
 
-      tooltip.style.top = this.shiftTooltip + 'px';
 
-    //console.log( i+1, size.height)
     }
-    let wrapperHeight = contentLeft > contentRight ? contentLeft : contentRight;
-    this.container.querySelector('.wrapper').style.height = wrapperHeight + 'px';
+    if(document.body.offsetWidth >= this.minDocumentWidth){
+      let wrapperHeight = contentLeft > contentRight ? contentLeft : contentRight;
+      this.wrapper.style.height = wrapperHeight + 'px';
+    }
 
   }
 
@@ -64,7 +74,14 @@ class TimeLine {
     }
 
   }
-
+  bodyWidth(){
+    let body = getComputedStyle(document.body);
+    return {
+      width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10),
+      height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10)
+    }
+  }
+  
   blockSize(block) {
 
     let box = getComputedStyle(block);
@@ -77,7 +94,7 @@ class TimeLine {
   }
 
 }
-window.onload = function () { new TimeLine(document.getElementById('timeline')) }
+window.onload = function () { new TimeLine('timeline', {minDocumentWidth: 500}) }
 
 
 //new TimeLine(document.getElementById('timeline'));
