@@ -8,9 +8,8 @@ class TimeLine {
     this.elems = this.container.querySelectorAll('.element-wrapper');
     this.tooltipHeight = parseInt((getComputedStyle(this.container.querySelector('.tooltip')).height), 10);
     this.shiftTooltip = 0;
-    let scrollWidth = this.getScrollWidth();
+    this.scrollWidth = this.getScrollWidth();
 
-    console.log(scrollWidth.width);
     this.setTimeLine(this.elems);
 
     window.addEventListener("resize", this.setTimeLine.bind(this, this.elems));
@@ -23,12 +22,12 @@ class TimeLine {
       contentRight = 0;
 
     let body = this.bodyWidth();
-    console.log(document.body.offsetWidth, document.body.clientWidth ,body.width)
+    // console.log(document.body.offsetWidth, document.body.clientWidth ,body.width+this.scrollWidth.width)
     for (let i = 0; i < array.length; i++) {
 
       let elem = array[i].querySelector('.element');
       let tooltip = array[i].querySelector('.tooltip');
-      let size = this.blockSize(elem);
+      let size = this.elementSize(elem);
 
       array[i].classList.remove('block-right');
       array[i].classList.remove('block-left');
@@ -81,8 +80,8 @@ class TimeLine {
   bodyWidth(){
     let body = getComputedStyle(document.body);
     return {
-      width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10),
-      height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10)
+      width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10) + this.scrollWidth.width,
+      height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10) + +this.scrollWidth.height
     }
   }
 
@@ -99,14 +98,15 @@ class TimeLine {
 
     document.body.appendChild(div);
     let scrollWidth = div.offsetWidth - div.clientWidth;
+    let scrollHeight = div.offsetHeight - div.clientHeight;
     document.body.removeChild(div);
 
-    return {width: scrollWidth};
+    return {width: scrollWidth, height: scrollHeight};
   }
 
-  blockSize(block) {
+  elementSize(element) {
 
-    let box = getComputedStyle(block);
+    let box = getComputedStyle(element);
 
     return {
       width: parseInt(box.width, 10) + parseInt(box.marginLeft, 10),
