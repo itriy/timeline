@@ -8,8 +8,6 @@ class TimeLine {
     this.elems = this.container.querySelectorAll('.element-wrapper');
     this.tooltipHeight = parseInt((getComputedStyle(this.container.querySelector('.tooltip')).height), 10);
     this.shiftTooltip = 0;
-    this.scrollWidth = this.getScrollWidth();
-
     this.setTimeLine(this.elems);
 
     window.addEventListener("resize", this.setTimeLine.bind(this, this.elems));
@@ -21,8 +19,8 @@ class TimeLine {
     let contentLeft = 0,
       contentRight = 0;
 
-    let body = this.bodyWidth();
-    // console.log(document.body.offsetWidth, document.body.clientWidth ,body.width+this.scrollWidth.width)
+    let body = this.elementSize(document.body);
+    
     for (let i = 0; i < array.length; i++) {
 
       let elem = array[i].querySelector('.element');
@@ -77,13 +75,13 @@ class TimeLine {
 
   }
 
-  bodyWidth(){
-    let body = getComputedStyle(document.body);
-    return {
-      width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10) + this.scrollWidth.width,
-      height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10) + +this.scrollWidth.height
-    }
-  }
+  // bodyWidth(){
+  //   let body = getComputedStyle(document.body);
+  //   return {
+  //     width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10) + this.scrollWidth.width,
+  //     height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10) + +this.scrollWidth.height
+  //   }
+  // }
 
   getScrollWidth(){
     let div = document.createElement('div');
@@ -96,6 +94,8 @@ class TimeLine {
     div.style.top = '0px';
     div.style.left = '0px';
 
+
+
     document.body.appendChild(div);
     let scrollWidth = div.offsetWidth - div.clientWidth;
     let scrollHeight = div.offsetHeight - div.clientHeight;
@@ -106,11 +106,13 @@ class TimeLine {
 
   elementSize(element) {
 
-    let box = getComputedStyle(element);
+    let element = getComputedStyle(element);
+
+    this.scrollWidth = this.getScrollWidth();
 
     return {
-      width: parseInt(box.width, 10) + parseInt(box.marginLeft, 10),
-      height: parseInt(box.height, 10) + parseInt(box.marginBottom, 10)
+      width: parseInt(element.width, 10) + parseInt(element.marginLeft, 10) + parseInt(element.marginRight, 10) + this.scrollWidth.width,
+      height: parseInt(element.height, 10) + parseInt(element.marginBottom, 10) + parseInt(element.marginTop, 10) + +this.scrollWidth.height
     }
 
   }
