@@ -29,6 +29,8 @@ class TimeLine {
 
       elems[i].classList.remove('block-right');
       elems[i].classList.remove('block-left');
+      this.wrapper.classList.add('tl-mobile');
+
       tooltip.style.top = '';
       elem.style.top = '';
       this.wrapper.style.height = '';
@@ -49,7 +51,8 @@ class TimeLine {
           contentRight += size.height;
 
         }
-
+        
+        this.wrapper.classList.remove('tl-mobile');
         tooltip.style.top = this.shiftTooltip + 'px';
       }
 
