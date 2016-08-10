@@ -12,6 +12,7 @@
       this.setTimeLine(this.wrapper);
 
       window.addEventListener("resize", this.setTimeLine.bind(this, this.wrapper));
+      //this.wrapper.addEventListener("DOMSubtreeModified", this.setTimeLine.bind(this, this.wrapper));
 
     }
 
@@ -117,4 +118,4 @@
   window.TimeLine = TimeLine;
 })();
 
-window.onload = function () { new TimeLine('#timeline', {minDocumentWidth: 500}) }
+window.onload = function () { new TimeLine('#timeline', {minDocumentWidth: 800}) }
