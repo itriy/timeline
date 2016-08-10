@@ -109,7 +109,7 @@
 
       return {
         width: parseInt(elem.width, 10) + parseInt(elem.marginLeft, 10) + parseInt(elem.marginRight, 10) + this.scrollWidth.width,
-        height: parseInt(elem.height, 10) + parseInt(elem.marginBottom, 10) + parseInt(elem.marginTop, 10) + +this.scrollWidth.height
+        height: parseInt(elem.height, 10) + parseInt(elem.marginBottom, 10) + parseInt(elem.marginTop, 10) + this.scrollWidth.height
       }
 
     }
