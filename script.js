@@ -5,30 +5,30 @@ class TimeLine {
     this.container = document.getElementById(container);
     this.minDocumentWidth = options.minDocumentWidth || true;
     this.wrapper = this.container.querySelector('.wrapper');
-    this.elems = this.container.querySelectorAll('.element-wrapper');
     this.tooltipHeight = parseInt((getComputedStyle(this.container.querySelector('.tooltip')).height), 10);
     this.shiftTooltip = 0;
-    this.setTimeLine(this.elems);
+    this.setTimeLine(this.wrapper);
 
-    window.addEventListener("resize", this.setTimeLine.bind(this, this.elems));
+    window.addEventListener("resize", this.setTimeLine.bind(this, this.wrapper));
 
   }
 
-  setTimeLine(array) {
+  setTimeLine(wrapper) {
+    let elems = wrapper.querySelectorAll('.element-wrapper');
 
     let contentLeft = 0,
-      contentRight = 0;
+        contentRight = 0;
 
     let body = this.elementSize(document.body);
     
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < elems.length; i++) {
 
-      let elem = array[i].querySelector('.element');
-      let tooltip = array[i].querySelector('.tooltip');
+      let elem = elems[i].querySelector('.element');
+      let tooltip = elems[i].querySelector('.tooltip');
       let size = this.elementSize(elem);
 
-      array[i].classList.remove('block-right');
-      array[i].classList.remove('block-left');
+      elems[i].classList.remove('block-right');
+      elems[i].classList.remove('block-left');
       tooltip.style.top = '';
       elem.style.top = '';
       this.wrapper.style.height = '';
@@ -37,14 +37,14 @@ class TimeLine {
         if (contentLeft <= contentRight) {
 
           elem.style.top = contentLeft + 'px';
-          array[i].classList.add('block-left');
+          elems[i].classList.add('block-left');
           this.tooltipPosition(contentLeft);
           contentLeft += size.height;
 
         } else {
 
           elem.style.top = contentRight + 'px';
-          array[i].classList.add('block-right');
+          elems[i].classList.add('block-right');
           this.tooltipPosition(contentRight);
           contentRight += size.height;
 
@@ -74,14 +74,6 @@ class TimeLine {
     }
 
   }
-
-  // bodyWidth(){
-  //   let body = getComputedStyle(document.body);
-  //   return {
-  //     width: parseInt(body.width, 10) + parseInt(body.marginLeft, 10) + parseInt(body.marginRight, 10) + this.scrollWidth.width,
-  //     height: parseInt(body.height, 10) + parseInt(body.marginBottom, 10) + parseInt(body.marginTop, 10) + +this.scrollWidth.height
-  //   }
-  // }
 
   getScrollWidth(){
     let div = document.createElement('div');
