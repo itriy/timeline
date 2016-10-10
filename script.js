@@ -12,7 +12,7 @@
       this.setTimeLine(this.wrapper);
 
       window.addEventListener("resize", this.setTimeLine.bind(this, this.wrapper));
-      //this.wrapper.addEventListener("DOMSubtreeModified", this.setTimeLine.bind(this, this.wrapper));
+      this.wrapper.addEventListener("DOMSubtreeModified", this.setTimeLine.bind(this, this.wrapper));
 
     }
 
